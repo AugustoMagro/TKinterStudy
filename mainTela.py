@@ -1,6 +1,6 @@
 import tkinter as tk
 import customtkinter as ck
-from inclusao import *
+from PIL import Image, ImageTk
 from menu import Menu
 from Login import Login
 from tela1 import Tela1
@@ -15,9 +15,11 @@ class App(ck.CTk):
         #setup
         super().__init__()
         ck.set_appearance_mode("dark")
-        self.geometry("1024x768")
+        self.geometry("1980x1080")
         self.minsize(600, 600)
         self.title("tela teste")
+        self.iconbitmap(r"C:\Users\augus\OneDrive\Documentos\TelaPY\Images\4417105_cdn_connected_globe_dots_earth_icon.ico")
+
 
         #layout
         self.rowconfigure(0, weight=1)

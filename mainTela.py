@@ -15,10 +15,12 @@ class App(ck.CTk):
         #setup
         super().__init__()
         ck.set_appearance_mode("dark")
-        self.geometry("1980x1080")
-        self.minsize(600, 600)
+        #self.attributes('-fullscreen', True)
+        self.minsize(1920, 1080)
+        self.maxsize(1920, 1080)
         self.title("tela teste")
         self.iconbitmap(r"C:\Users\augus\OneDrive\Documentos\TelaPY\Images\4417105_cdn_connected_globe_dots_earth_icon.ico")
+        #self.bind("<Escape>", self.end_fullscreen)
 
 
         #layout
@@ -53,6 +55,10 @@ class App(ck.CTk):
 
     def tela5(self):
         self.tela5 = Tela5(self)
+
+    def end_fullscreen(self, event=None):
+        self.state = False
+        self.attributes("-fullscreen", False)
 
 App()
 

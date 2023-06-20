@@ -9,7 +9,7 @@ class ConectarDB:
         """
         self.con = pyodbc.connect(r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};'
                                   # Deve ser utilizado o path/caminho absoluto até o arquivo.
-                                  r'DBQ=C:\Users\augus\OneDrive\Documentos\TelaPY\telaBase1.accdb;')
+                                  r'DBQ=C:\Users\augus\OneDrive\Documentos\TelaPY\Base\MarketDB.accdb;')
 
         # Criando o cursor que irá executar os comandos SQL (instruções DML, DDL, etc).
         self.cur = self.con.cursor()
@@ -55,13 +55,13 @@ class ConectarDB:
             self.con.commit()
             print('\n[!] Registro inserido com sucesso [!]\n')
 
-    def consultar_registro_pela_id(self, CPF):
+    def consultar_registro_pela_id(self, nome, senha):
         """Consulta registro pela id.
         :param rowid: (int) id do usuário que se deseja consultar.
         :return: É retornada uma tupla (tuple) com os dados.
         Caso o registro não seja localizado é retornado ``None``.
         """
-        return self.cur.execute("""SELECT nome FROM base_geral WHERE cpf=? """, CPF).fetchone()
+        return self.cur.execute('''SELECT nome FROM users_cadastro WHERE nome=? AND senha=?''', nome, senha).fetchone()
 
     def consultar_registros(self, nome):
         """Consulta todos os registros da tabela.
@@ -72,7 +72,7 @@ class ConectarDB:
         contendo os dados.
         Se não houver dados é retornada uma lista vazia [``[]``].
         """
-        return self.cur.execute(f'''SELECT TOP {10} * FROM base_geral WHERE nome=?''', nome).fetchall()
+        return self.cur.execute(f'''SELECT nome FROM users_cadastro WHERE nome=?''', nome).fetchall()
 
     def alterar_registro(self, rowid, nome, sexo):
         """Alterar uma linha da tabela com base na id.
